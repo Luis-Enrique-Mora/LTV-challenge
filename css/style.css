@@ -170,6 +170,10 @@ section {
   line-height: normal;
 }
 
+.nav-tab-color {
+  color: #004A80;
+}
+
 @media (max-width: 767px) {
   .input-group {
     flex-direction: column;
