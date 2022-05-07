@@ -1,10 +1,23 @@
+
 $(document).ready(function () {
+
   // Variables
   const url = 'https://ltv-data-api.herokuapp.com/api/v1/records.json?';
   const proxyurl = "";
   const emailRegEx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
   var emailError = false;
   var phoneError = false;
+  
+  // it waits for a second to simulate loading page
+  setTimeout( function() {
+    var loadingSection = document.querySelector( ".loading" );
+    var aboveTheFoldSection = document.querySelector( ".above-the-fold" );
+    var featuresSection = document.querySelector( ".features");
+
+    loadingSection.classList.add( "hide" );
+    aboveTheFoldSection.classList.remove( "hide" );
+    featuresSection.classList.remove( "hide" );
+  }, 1000);
   
   // it request to the api and redirects to result page
   function request( urlAndQuerystring ) {
