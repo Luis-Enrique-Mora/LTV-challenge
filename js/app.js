@@ -104,7 +104,7 @@ $(document).ready(function () {
   // execute logic in case of pressing enter while typing in the phone input
   $( 'input[name="phone"]' ).keypress(function ( event ) {
 
-    let phoneValue = $( 'input[name="phone"]' ).val().toLowerCase();
+    var phoneValue = parseInt( $( 'input[name="phone"]' ).val() );
     phoneValue = typeof( phoneValue ) == 'number' && phoneValue.toString().length == 10 ? phoneValue : false;
     
     if ( phoneValue ) {
