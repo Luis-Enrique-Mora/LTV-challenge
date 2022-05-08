@@ -12,6 +12,17 @@ $(document).ready(function () {
     input : document.querySelector( ".form-control" ),
     errorMessage : document.querySelector( ".error-msg" )
   };
+
+  // it waits for a second to simulate loading page
+  setTimeout( function() {
+    var loadingSection = document.querySelector( ".loading" );
+    var aboveTheFoldSection = document.querySelector( ".above-the-fold" );
+    var featuresSection = document.querySelector( ".features");
+
+    loadingSection.classList.add( "hide" );
+    aboveTheFoldSection.classList.remove( "hide" );
+    featuresSection.classList.remove( "hide" );
+  }, 1000);
   
   $( "#btn-search-by-email" ).on( "click", function( e ) {
     e.preventDefault();
