@@ -258,6 +258,9 @@ section {
   .btn-warning{
     width: 48%;
   }
+  #btn-search-by-phone{
+    margin-left: 10px !important;
+  }
 }
 
 /* ************************************************************
