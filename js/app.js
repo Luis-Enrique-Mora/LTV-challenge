@@ -10,18 +10,17 @@ $(document).ready(function () {
     searchByEmailBtn : document.querySelector("#btn-search-by-email"),
     searchByphoneBtn : document.querySelector("#btn-search-by-phone"),
     input : document.querySelector( ".form-control" ),
-    errorMessage : document.querySelector( ".error-msg" )
+    errorMessage : document.querySelector( ".error-msg" ),
+    loadingSection : document.querySelector( ".loading" ),
+    aboveTheFoldSection : document.querySelector( ".above-the-fold" ),
+    featuresSection : document.querySelector( ".features"),
   };
 
   // it waits for a second to simulate loading page
   setTimeout( function() {
-    var loadingSection = document.querySelector( ".loading" );
-    var aboveTheFoldSection = document.querySelector( ".above-the-fold" );
-    var featuresSection = document.querySelector( ".features");
-
-    loadingSection.classList.add( "hide" );
-    aboveTheFoldSection.classList.remove( "hide" );
-    featuresSection.classList.remove( "hide" );
+    _.loadingSection.classList.add( "hide" );
+    _.aboveTheFoldSection.classList.remove( "hide" );
+    _.featuresSection.classList.remove( "hide" );
   }, 1000);
   
   $( "#btn-search-by-email" ).on( "click", function( e ) {
