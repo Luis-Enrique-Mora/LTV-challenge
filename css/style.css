@@ -187,7 +187,7 @@ section {
   border-width: 3px;
 }
 
-.actual-search:before {
+.btn-warning:before {
   content: "";
   position: absolute;
   margin-top: 18px;

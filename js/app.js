@@ -1,5 +1,43 @@
 $(document).ready(function () {
 
+  // variables
+  var searchType = 'email';
+  // DOM variables for DOM manipulation
+  const _ = {
+    searchByEmailBtn : document.querySelector("#btn-search-by-email"),
+    searchByphoneBtn : document.querySelector("#btn-search-by-phone"),
+    input : document.querySelector( ".form-control" ),
+    errorMessage : document.querySelector( ".error-msg" )
+  };
+
+  $( "#btn-search-by-email" ).on( "click", function( e ) {
+    e.preventDefault();
+
+    _.searchByphoneBtn.classList.remove( "btn-warning" );
+    _.searchByphoneBtn.classList.add( "btn-outline-warning" );
+    _.searchByEmailBtn.classList.add( "btn-warning" );
+    _.searchByEmailBtn.classList.remove( "btn-outline-warning" );
+    _.errorMessage.innerText = "Please enter a valid email address";
+    _.input.placeholder = "ENTER AN EMAIL ADDRESS";
+    _.errorMessage.parentNode.classList.remove( "error" );
+
+    searchType = 'email';
+  });
+
+  $( "#btn-search-by-phone").on( "click", function( e ) {
+    e.preventDefault();
+
+    _.searchByphoneBtn.classList.add( "btn-warning" );
+    _.searchByphoneBtn.classList.remove( "btn-outline-warning" );
+    _.searchByEmailBtn.classList.remove( "btn-warning" );
+    _.searchByEmailBtn.classList.add( "btn-outline-warning" );
+    _.errorMessage.innerText = "Please enter a valid phone number";
+    _.input.placeholder = "ENTER A PHONE NUMBER";
+    _.errorMessage.parentNode.classList.remove( "error" );
+
+    searchType = 'phone';
+  });
+
   $("#btn-search").on("click", function (e) {
     e.preventDefault();
     localStorage.clear(); //Clears storage for next request
