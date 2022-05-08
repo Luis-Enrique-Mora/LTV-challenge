@@ -20,6 +20,7 @@ $(document).ready(function () {
     _.searchByphoneBtn.classList.add( "btn-outline-warning" );
     _.searchByEmailBtn.classList.add( "btn-warning" );
     _.searchByEmailBtn.classList.remove( "btn-outline-warning" );
+    _.input.type = "text";
     _.errorMessage.innerText = "Please enter a valid email address";
     _.input.placeholder = "ENTER AN EMAIL ADDRESS";
     _.errorMessage.parentNode.classList.remove( "error" );
@@ -34,6 +35,7 @@ $(document).ready(function () {
     _.searchByphoneBtn.classList.remove( "btn-outline-warning" );
     _.searchByEmailBtn.classList.remove( "btn-warning" );
     _.searchByEmailBtn.classList.add( "btn-outline-warning" );
+    _.input.type = "number";
     _.errorMessage.innerText = "Please enter a valid phone number";
     _.input.placeholder = "ENTER A PHONE NUMBER";
     _.errorMessage.parentNode.classList.remove( "error" );
@@ -60,60 +62,69 @@ $(document).ready(function () {
 
     e.preventDefault();
     localStorage.clear(); //Clears storage for next request
-    var inputValue = _.input.value.toLowerCase();
-    console.log( _.input );
-    console.log( typeof(inputValue), inputValue );
+    var inputValue = _.input.value;
+
     // Selecting type of search, if type of search email: email request, else: phone request
     if( searchType == "email" ) {
+      var emailValue = inputValue.toLowerCase();
       // If email is valid proceed with the request, else show an error message
-      if ( inputValue.match( emailRegEx ) ) {
+      if ( emailValue.match( emailRegEx ) ) {
         _.errorMessage.parentNode.classList.remove( "error" );
-        const urlPlusQueryString = url + 'email=' + inputValue;
+        const urlPlusQueryString = url + 'email=' + emailValue;
         // it makes a request to the api with an email address and redirects to page result
         request( urlPlusQueryString );
       } else {
         _.errorMessage.parentNode.classList.add( "error" );
       }
     } else {
-      
+      inputValue = parseInt( inputValue );
+      // Phone validation, valid if phone equals to number and length = 10, else invalid = false
+      let phoneValue = typeof( inputValue ) == 'number' && inputValue.toString().length == 10 ? inputValue : false;
+      // If phone is valid proceed with the request, else show an error message
+      if ( phoneValue ) {
+        _.errorMessage.parentNode.classList.remove( "error" );
+        const urlPlusQueryString = url + 'phone=' + phoneValue;
+        // it makes a request to the api with a phone number and redirects to page result
+        request( urlPlusQueryString );
+      } else {
+        _.errorMessage.parentNode.classList.add( "error" );
+      }
     }
-
   });
 
-  $('input[type="text"]').keypress(function (event) {
-    email = $('input[type="text"]').val().toLowerCase();
-    regEx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-    if (email.match(regEx)) {
-      x = true;
-      document.querySelector('input[type="text"]').parentNode.classList.remove("error");
-    } else {
-      x = false;
-    }
+  $('.form-control').keypress(function (event) {
+    
+    e.preventDefault();
+    localStorage.clear(); //Clears storage for next request
+    var inputValue = _.input.value;
     keycode = (event.keyCode ? event.keyCode : event.which);
+
     if (keycode == '13') {
-      /**
-       * Makes a request to ltv API to search an specific email address.
-       * If there's a response, it gets stored in the local storage and redirects to results page
-       */
-      event.preventDefault();
-      localStorage.clear(); //Clears storage for next request
-
-      var x, y;
-
-
-      if (x === true) {
-        const proxyurl = "";
-        const url =
-          'https://ltv-data-api.herokuapp.com/api/v1/records.json?email=' + email;
-        fetch(proxyurl + url)
-          .then((response) => response.text())
-          .then(function (contents) {
-            localStorage.setItem("userObject", contents);
-            window.location.href = "result.html";
-          })
-          .catch((e) => console.log(e));
-      } else if (x !== true) {
-        document.querySelector('input[type="text"]').parentNode.classList.add("error");
+      // Selecting type of search, if type of search email: email request, else: phone request
+      if( searchType == "email" ) {
+        var emailValue = inputValue.toLowerCase();
+        // If email is valid proceed with the request, else show an error message
+        if ( emailValue.match( emailRegEx ) ) {
+          _.errorMessage.parentNode.classList.remove( "error" );
+          const urlPlusQueryString = url + 'email=' + emailValue;
+          // it makes a request to the api with an email address and redirects to page result
+          request( urlPlusQueryString );
+        } else {
+          _.errorMessage.parentNode.classList.add( "error" );
+        }
+      } else {
+        inputValue = parseInt( inputValue );
+        // Phone validation, valid if phone equals to number and length = 10, else invalid = false
+        let phoneValue = typeof( inputValue ) == 'number' && inputValue.toString().length == 10 ? inputValue : false;
+        // If phone is valid proceed with the request, else show an error message
+        if ( phoneValue ) {
+          _.errorMessage.parentNode.classList.remove( "error" );
+          const urlPlusQueryString = url + 'phone=' + phoneValue;
+          // it makes a request to the api with a phone number and redirects to page result
+          request( urlPlusQueryString );
+        } else {
+          _.errorMessage.parentNode.classList.add( "error" );
+        }
       }
     }
   });
