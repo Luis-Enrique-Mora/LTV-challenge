@@ -17,13 +17,16 @@ To run this project you can drag the file `index.html` to the web browser
 
 ## Searches by email
 To make searches by email just press the yellow email address tag and enter a valid email address into the input
+
 ![image](https://user-images.githubusercontent.com/52580104/167521604-56e46d85-74e9-4f39-befb-27b8d9d1fe01.png)
 
 if you enter an invalid email address or do not enter anything on the input you'll be notified with an error message like this
+
 ![image](https://user-images.githubusercontent.com/52580104/167520857-3b604372-b2a3-427b-a41a-4b13f18fd8e2.png)
 
 ## Searches by phone number
 To make searches by phone number just press the yellow tag which specifies the phone number searches like below
+
 ![image](https://user-images.githubusercontent.com/52580104/167521519-7cc4899c-8b83-452b-8c1c-8a22c4abf129.png)
 
 if you enter an invalid phone number you'll be notified with an error message, valid phone numbers must to be 10 numbers as max length
